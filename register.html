@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Here</title>
+    <link rel="icon" href="./files/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body class="register-body">
+
+    <nav>
+        <img src="./files/logo.png" class="logo" alt="Logo" title="travel and tourism">
+
+        <ul class="navbar">
+            <li>
+                <a href="./index.html">Home</a>
+                <a href="./index.html#locations">Locations</a>
+                <a href="./index.html#package">Packages</a>
+                <a href="./about.html">About Us</a>
+                <a href="./contact.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="registration">
+        <div class="register-form">
+              <h1>BOOK <span>YOUR TRAVEL</span></h1>
+             <form id="registrationForm">
+           <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+             <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+          <label for="phoneNumber">PhNo:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required><br><br>
+
+            <label for="age">Age:</label>
+         <input type="number" id="age" name="age" required><br><br>
+
+            <h4>Gender</h4>
+            <input type="radio" name="mygender" id="" required> Male &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+            <input type="radio" name="mygender" id=""> Female
+            <h4>Departure</h4>
+             
+            <input type="date" id="departureDate" name="departureDate" required><br><br>
+            <h4>Return</h4>
+           
+           <input type="date" id="returnDate" name="returnDate" required><br><br>
+
+            <h4>Travel Destination</h4>
+            <input type="radio" name="td" id=""> Kashmir &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="td" id=""> Istanbul &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="td" id=""> Paris &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="td" id=""> Bali &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="td" id=""> Dubai &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="td" id=""> Geneva &nbsp; &nbsp; &nbsp; 
+            <input type="radio" name="td" id=""> Port Blair &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="td" id=""> Rome &nbsp; &nbsp; &nbsp;
+            <br> <br>
+            <h4>Package</h4>
+            <input type="radio" name="locations" id="loc1" required> Bronze &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="locations" id="loc1"> Silver &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="locations" id="loc1"> Gold &nbsp; &nbsp; &nbsp;
+            <input type="radio" name="locations" id="loc1"> Platinum &nbsp; &nbsp; &nbsp;
+            <br> <br> 
+           
+            <input type="submit" value="Submit" class="submitbtn">
+
+        </form>
+        <script>
+        const form = document.getElementById('registrationForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const ageInput = document.getElementById('age');
+        const departureDateInput = document.getElementById('departureDate');
+        const returnDateInput = document.getElementById('returnDate');
+
+        form.addEventListener('submit', function (event) {
+            clearErrorMessages();
+
+            if (!validateName(nameInput.value)) {
+                showError(nameInput, 'Invalid name');
+                event.preventDefault();
+            }
+
+            if (!validateEmail(emailInput.value)) {
+                showError(emailInput, 'Invalid email');
+                event.preventDefault();
+            }
+
+            if (!validatePhoneNumber(phoneNumberInput.value)) {
+                showError(phoneNumberInput, 'Invalid phone number');
+                event.preventDefault();
+            }
+
+            if (!validateAge(ageInput.value)) {
+                showError(ageInput, 'Invalid age');
+                event.preventDefault();
+            }
+
+            if (!validateDateRange(departureDateInput.value, returnDateInput.value)) {
+                showError(departureDateInput, 'Invalid date range');
+                showError(returnDateInput, 'Invalid date range');
+                event.preventDefault();
+            }
+        });
+
+        function validateName(name) {
+            const namePattern = /^[a-zA-Z\s]+$/;
+            return namePattern.test(name);
+        }
+
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        function validatePhoneNumber(phoneNumber) {
+            const phoneNumberPattern = /^\d{10}$/;
+            return phoneNumberPattern.test(phoneNumber);
+        }
+
+        function validateAge(age) {
+            return age >= 18 && age <= 120;
+        }
+
+        function validateDateRange(departureDate, returnDate) {
+            const departure = new Date(departureDate);
+            const returnD = new Date(returnDate);
+            return departure <= returnD;
+        }
+
+        function showError(inputElement, errorMessage) {
+            const errorElement = document.createElement('span');
+            errorElement.className = 'error-message';
+            errorElement.textContent = errorMessage;
+            inputElement.insertAdjacentElement('afterend', errorElement);
+        }
+
+        function clearErrorMessages() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(function (errorMessage) {
+                errorMessage.remove();
+            });
+        }
+    </script>
+
+        </div>
+   
+
+
+
+</body>
+</html>
